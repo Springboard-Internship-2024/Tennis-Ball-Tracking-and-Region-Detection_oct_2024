@@ -9,8 +9,7 @@ import sys
 import os
 
 opencv_path = os.path.join(os.getcwd(), 'opencv')
-
-sys.path.append(os.path.join(opencv_path, 'cv2'))
+sys.path.append(opencv_path)
 
 import cv2
 
