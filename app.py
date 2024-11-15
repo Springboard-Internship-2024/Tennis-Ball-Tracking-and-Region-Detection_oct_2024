@@ -14,8 +14,12 @@ sys.path.append(os.path.join(opencv_path, 'cv2'))
 import cv2
 
 
+# Add the path to sys.path so you can import cv2 directly
 
-model_path = "tplayer_best.pt"
+
+pathlib.PosixPath = pathlib.WindowsPath
+
+model_path = "models/tball_best.pt"
 model = torch.hub.load("ultralytics/yolov5", "custom", path=model_path)
 
 st.title("Tennis Player Detection")
