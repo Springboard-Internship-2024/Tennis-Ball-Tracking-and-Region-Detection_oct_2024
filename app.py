@@ -1,15 +1,23 @@
 
 import streamlit as st
 import torch
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), 'opencv'))
-
-import cv2
 import tempfile
 import numpy as np
 import pathlib
 from pathlib import Path
+import sys
+import os
+
+opencv_path = os.path.join(os.path.dirname(__file__), 'opencv')
+sys.path.append(os.path.join(opencv_path, 'cv2'))
+
+import cv2
+
+
+# Add the path to sys.path so you can import cv2 directly
+
+
+pathlib.PosixPath = pathlib.WindowsPath
 
 model_path = "tplayer_best.pt"
 model = torch.hub.load("ultralytics/yolov5", "custom", path=model_path)
