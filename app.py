@@ -11,7 +11,7 @@ import numpy as np
 import pathlib
 from pathlib import Path
 
-model_path = "tball_best.pt"
+model_path = "tplayer_best.pt"
 model = torch.hub.load("ultralytics/yolov5", "custom", path=model_path)
 
 st.title("Tennis Player Detection")
