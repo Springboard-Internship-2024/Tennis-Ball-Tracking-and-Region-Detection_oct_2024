@@ -19,7 +19,63 @@ import cv2
 model_path = "tplayer_best.pt"
 model = torch.hub.load("ultralytics/yolov5", "custom", path=model_path)
 
-st.title("Tennis Player Detection")
+st.markdown("""
+    <style>
+        .main {
+            max-width: 900px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .css-18e3th9 {
+            background: linear-gradient(135deg, #f6d365, #fda085);
+        }
+        
+        h1 {
+            color: #283593;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+        }
+        
+        .stButton>button {
+            background-color: #0288d1;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .stButton>button:hover {
+            background-color: #0277bd;
+        }
+        
+        .stProgress .st-bs {
+            background-color: #283593 !important;
+        }
+        
+        .stDownloadButton > button {
+            background-color: #388e3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        .stDownloadButton > button:hover {
+            background-color: #2e7d32;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+st.title("🎾 Tennis Game Tracker")
+st.write("Detect players and balls in a tennis match using YOLOv5. Upload a video, run detection, and download the processed result.")
 
 col1, col2 = st.columns(2)
 
