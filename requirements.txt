@@ -1,3 +1,4 @@
+
 # YOLOv5 requirements
 # Usage: pip install -r requirements.txt
 
@@ -5,6 +6,7 @@
 gitpython>=3.1.30
 matplotlib>=3.3
 numpy>=1.23.5
+opencv-python>=4.1.1
 pillow>=10.3.0
 psutil  # system resources
 PyYAML>=5.3.1
@@ -25,6 +27,10 @@ ultralytics>=8.2.34  # https://ultralytics.com
 # Plotting --------------------------------------------------------------------
 pandas>=1.1.4
 seaborn>=0.11.0
+streamlit
+opencv-python-headless
+torch
+numpy
 
 # Export ----------------------------------------------------------------------
 # coremltools>=6.0  # CoreML export
@@ -46,4 +52,3 @@ setuptools>=70.0.0 # Snyk vulnerability fix
 # mss  # screenshots
 # albumentations>=1.0.3
 # pycocotools>=2.0.6  # COCO mAP
-
