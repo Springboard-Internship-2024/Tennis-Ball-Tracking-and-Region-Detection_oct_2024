@@ -11,8 +11,6 @@ numpy
 onnx
 onnxruntime
 onnxslim
-opencv-python
-opencv-python-headless
 openvino
 paddle
 pafy
@@ -29,8 +27,6 @@ streamlit
 tensorflow
 tensorflowjs
 tensorrt
-tflite-runtime
-tflite-support
 torch
 torchvision
 tqdm
