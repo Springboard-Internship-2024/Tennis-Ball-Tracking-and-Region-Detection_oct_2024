@@ -1,4 +1,3 @@
-
 import streamlit as st
 import torch
 import tempfile
@@ -8,16 +7,18 @@ from pathlib import Path
 import sys
 import os
 
-opencv_path = os.path.join(os.getcwd(), 'opencv')
-sys.path.append(opencv_path)
-
+# Add the path to sys.path for OpenCV
+opencv_path = os.path.join(os.path.dirname(__file__), 'opencv')
+sys.path.append(os.path.join(opencv_path, 'cv2'))
 import cv2
 
+# Adjust pathlib for Windows if needed
+model1_path = "GitHubtennis_project_infosys/tball_best.pt"
+model2_path ="GitHub/tennis_project_infosys/tplayer_best.pt"
 
-# Add the path to sys.path so you can import cv2 directly
-
-model_path = "tplayer_best.pt"
-model = torch.hub.load("ultralytics/yolov5", "custom", path=model_path)
+# Load both models
+model1 = torch.hub.load("ultralytics/yolov5", "custom", path=model1_path)
+model2 = torch.hub.load("ultralytics/yolov5", "custom", path=model2_path)
 
 st.markdown("""
     <style>
@@ -54,10 +55,6 @@ st.markdown("""
             background-color: #0277bd;
         }
         
-        .stProgress .st-bs {
-            background-color: #283593 !important;
-        }
-        
         .stDownloadButton > button {
             background-color: #388e3c;
             color: white;
@@ -74,6 +71,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# App title and description
 st.title("🎾 Tennis Game Tracker")
 st.write("Detect players and balls in a tennis match using YOLOv5. Upload a video, run detection, and download the processed result.")
 
@@ -101,16 +99,14 @@ with col2:
             tmp_file.write(video_file.read())
             st.session_state['upload_path'] = tmp_file.name
         st.success("Video uploaded successfully!")
-        st.session_state['processed'] = False  # Reset processing state
-        st.session_state['output_path'] = None  # Clear previous output path
-        st.session_state['processing_msg'] = None  # Clear any previous processing message
+        st.session_state['processed'] = False
+        st.session_state['output_path'] = None
+        st.session_state['processing_msg'] = None
 
-    # Button to preview the uploaded video
     if st.session_state['upload_path'] and st.button("Preview Uploaded Video"):
         with col1:
             st.video(st.session_state['upload_path'])
 
-    # Button to run the model
     if st.button("Run Model") and video_file is not None and not st.session_state['processed']:
         st.session_state['processing_msg'] = st.info("Processing video, please wait...")
 
@@ -118,34 +114,39 @@ with col2:
         video = cv2.VideoCapture(st.session_state['upload_path'])
 
         # Setup output file for saving processed video
-        output_tempfile = tempfile.NamedTemporaryFile(delete=False, suffix='.mp4')  # Create temporary file
-        st.session_state['output_path'] = output_tempfile.name  # Store the path of the temporary file
-        output_tempfile.close()  # Close the file (still valid for writing)
+        output_tempfile = tempfile.NamedTemporaryFile(delete=False, suffix='.mp4')
+        st.session_state['output_path'] = output_tempfile.name
+        output_tempfile.close()
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         fps = video.get(cv2.CAP_PROP_FPS)
         width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
         out = cv2.VideoWriter(st.session_state['output_path'], fourcc, fps, (width, height))
 
-        # Process frames
+        # Process frames with both models
         while video.isOpened():
             ret, frame = video.read()
             if not ret:
                 break
-            results = model(frame)
-            annotated_frame = np.squeeze(results.render())
+            
+            # Apply the first model
+            results1 = model1(frame)
+            frame_after_model1 = np.squeeze(results1.render())
+            
+            # Apply the second model on the output of the first model
+            results2 = model2(frame_after_model1)
+            annotated_frame = np.squeeze(results2.render())
+            
             out.write(annotated_frame)
 
         video.release()
         out.release()
 
-        # Mark processing complete and clear message
         st.session_state['processed'] = True
-        st.session_state['processing_msg'].empty()  # Remove "Processing" message
+        st.session_state['processing_msg'].empty()
         st.success("Processing complete!")
 
-    # Button to preview processed video after running the model
-    if st.session_state['output_path'] and st.session_state['processed'] :
+    if st.session_state['output_path'] and st.session_state['processed']:
         with col1:
             try:
                 if Path(st.session_state['output_path']).exists():
@@ -155,9 +156,7 @@ with col2:
             except Exception as e:
                 st.error(f"Error loading video: {e}")
 
-
-    # Provide download button for processed video
-    if st.session_state['output_path'] and st.session_state['processed'] :
+    if st.session_state['output_path'] and st.session_state['processed']:
         with open(st.session_state['output_path'], "rb") as f:
             st.download_button(
                 label="Download Processed Video",
