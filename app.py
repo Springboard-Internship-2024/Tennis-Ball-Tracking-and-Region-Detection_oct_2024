@@ -8,8 +8,10 @@ import sys
 import os
 
 # Add the path to sys.path for OpenCV
-opencv_path = os.path.join(os.path.dirname(__file__), 'opencv')
-sys.path.append(os.path.join(opencv_path, 'cv2'))
+opencv_path = os.path.join(os.getcwd(), 'opencv')
+
+# Add the path to sys.path
+sys.path.append(opencv_path)
 import cv2
 
 # Adjust pathlib for Windows if needed
