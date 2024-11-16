@@ -13,8 +13,8 @@ sys.path.append(os.path.join(opencv_path, 'cv2'))
 import cv2
 
 # Adjust pathlib for Windows if needed
-model1_path = "GitHubtennis_project_infosys/tball_best.pt"
-model2_path ="GitHub/tennis_project_infosys/tplayer_best.pt"
+model1_path = "tball_best.pt"
+model2_path ="tplayer_best.pt"
 
 # Load both models
 model1 = torch.hub.load("ultralytics/yolov5", "custom", path=model1_path)
