@@ -1,0 +1,50 @@
+import random
+
+POP_SIZE = 10
+BIT_LENGTH = 5
+MUTATION_CHANCE = 0.01
+NUM_GENERATIONS = 50
+
+def fitness_eval(individual):
+    value = int("".join(map(str, individual)), 2)
+    return value ** 2
+
+def initialize_population(size):
+    return [[random.choice([0, 1]) for _ in range(BIT_LENGTH)] for _ in range(size)]
+
+def tournament_selection(population):
+    competitors = random.sample(population, 2)
+    return competitors[0] if fitness_eval(competitors[0]) > fitness_eval(competitors[1]) else competitors[1]
+
+def single_point_crossover(parent_a, parent_b):
+    crossover_point = random.randint(1, BIT_LENGTH - 1)
+    offspring1 = parent_a[:crossover_point] + parent_b[crossover_point:]
+    offspring2 = parent_b[:crossover_point] + parent_a[crossover_point:]
+    return offspring1, offspring2
+
+def bit_flip_mutation(individual):
+    for index in range(len(individual)):
+        if random.random() < MUTATION_CHANCE:
+            individual[index] = 1 - individual[index]
+    return individual
+
+def run_genetic_algorithm():
+    population = initialize_population(POP_SIZE)
+    
+    for generation in range(NUM_GENERATIONS):
+        new_population = []
+        for _ in range(POP_SIZE // 2):
+            parent1 = tournament_selection(population)
+            parent2 = tournament_selection(population)
+            child1, child2 = single_point_crossover(parent1, parent2)
+            new_population.append(bit_flip_mutation(child1))
+            new_population.append(bit_flip_mutation(child2))
+        
+        population = new_population
+
+    best_individual = max(population, key=fitness_eval)
+    print("Best Individual:", best_individual)
+    print("Best Fitness:", fitness_eval(best_individual))
+
+if __name__ == "_main_":
+    run_genetic_algorithm()
