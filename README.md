@@ -1,70 +1,112 @@
-# Tennis Player and Ball Detection using YOLOv5 and Streamlit
+Tennis Player and Ball Detection using YOLOv5 and Streamlit
 
-This project demonstrates real-time tennis ball and player detection from video input using a custom-trained YOLOv5 model. The application is built with Streamlit for an interactive user interface.
+Experience the power of AI with a cutting-edge application designed to detect tennis players and balls in real-time. This interactive tool uses a custom-trained YOLOv5 model and a seamless Streamlit interface to bring your tennis match analyses to life.
 
-**[Live Application](https://tennis-tracking-app-using-yolov5-da2ja3dfki3km75pou97iy.streamlit.app/)**
+Try the Live App!
 
-## Features
 
-- Upload video files for processing
-- Displays the progress of object detection
-- Shows output video with tennis ball and player detection after processing
+---
 
-## Setup Instructions
+Features
 
-### 1. Clone the Repository
+Video Upload: Supports .mp4 video uploads for processing.
 
-```bash
+Real-Time Detection: Tracks tennis players and ball positions in real-time.
+
+Progress Visualization: Stay updated with detection progress during video analysis.
+
+Output Video Playback: View enhanced videos with highlighted detections post-processing.
+
+
+
+---
+
+Quickstart Guide
+
+1. Clone the Repository
+
 git clone <repository-url>
 cd yolov5
-```
 
-### 2. Install Dependencies
+2. Install Dependencies
 
-Make sure you have Python installed. Then, install the required libraries:
+Ensure you have Python installed (version 3.8 or higher). Then install the required libraries:
 
-```bash
 pip install -r requirements.txt
-```
 
-### 3. Model Setup
+3. Prepare the Model
 
-Place the custom-trained YOLOv5 model file in the `yolov5/runs/exp/weights/best.pt`.
+Place your trained YOLOv5 model weights (best.pt) in the specified directory:
 
-### 4. Run the Application Locally
+yolov5/runs/exp/weights/best.pt
 
-Run the following command in the `yolov5` directory:
+4. Run the Streamlit App
 
-```bash
+Navigate to the yolov5 directory and launch the application:
+
 streamlit run app.py
-```
 
-## File Structure
 
-```
+---
+
+Folder Structure
+
 yolov5/
-├── app.py                  # Streamlit application file
+├── app.py                  # Streamlit application entry point
 ├── runs/
 │   └── exp/
 │       └── weights/
-│           └── best.pt     # Trained YOLOv5 model weights
-└── data/                   # Contains video input files
-```
+│           └── best.pt     # YOLOv5 model weights file
+├── data/                   # Input video directory
+└── outputs/                # Processed output videos
 
-## Usage
 
-1. Launch the Streamlit application.
-2. Upload a video file in `.mp4` format.
-3. Wait for the detection to process; the completion percentage will be displayed.
-4. After processing, view the output video with detections highlighted.
+---
 
-## Example
+Workflow
 
-Upload a sample tennis match video to detect player movements and tennis ball positions, using real-time updates for progress.
+1. Open the application locally or use the live app.
 
-## Dependencies
 
-- Streamlit
-- PyTorch
-- OpenCV
-- YOLOv5
+2. Upload a video (supported format: .mp4).
+
+
+3. The app processes the video and displays a progress bar.
+
+
+4. After completion, watch the enhanced video with tennis ball and player detections.
+
+
+
+
+---
+
+Dependencies
+
+The following tools and libraries power this project:
+
+Streamlit: For creating the user-friendly interface.
+
+PyTorch: For utilizing the YOLOv5 model.
+
+OpenCV: For video processing and visualization.
+
+YOLOv5: The backbone object detection framework.
+
+
+
+---
+
+Example Use Case
+
+Tennis Analytics: Analyze player movements, ball trajectories, and match dynamics effortlessly by uploading your game recordings.
+
+Coaching Tools: Provide actionable insights to players by identifying patterns and tendencies.
+
+Highlight Reel Creation: Enhance video footage with dynamic overlays for professional presentations.
+
+
+
+---
+
+Get started with tennis tracking today! 🚀
