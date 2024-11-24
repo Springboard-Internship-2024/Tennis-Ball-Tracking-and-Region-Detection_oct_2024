@@ -38,33 +38,8 @@ Run the following command in the `yolov5` directory:
 ```bash
 streamlit run app.py
 ```
+## Features
 
-## File Structure
-
-```
-yolov5/
-├── app.py                  # Streamlit application file
-├── runs/
-│   └── exp/
-│       └── weights/
-│           └── best.pt     # Trained YOLOv5 model weights
-└── data/                   # Contains video input files
-```
-
-## Usage
-
-1. Launch the Streamlit application.
-2. Upload a video file in `.mp4` format.
-3. Wait for the detection to process; the completion percentage will be displayed.
-4. After processing, view the output video with detections highlighted.
-
-## Example
-
-Upload a sample tennis match video to detect player movements and tennis ball positions, using real-time updates for progress.
-
-## Dependencies
-
-- Streamlit
-- PyTorch
-- OpenCV
-- YOLOv5
+- Upload video files for processing
+- Displays the progress of object detection
+- Shows output video with tennis ball and player detection after processing
