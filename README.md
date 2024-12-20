@@ -1,7 +1,3 @@
-The content in the uploaded file closely matches your request. Here's a creative reimagining of it with enhanced clarity, engagement, and formatting for better presentation:
-
----
-
 # 🎾 Tennis Player and Ball Detection with YOLOv5 and Streamlit 🚀
 
 Harness the power of machine learning to detect tennis balls and players in real time! This project features an interactive Streamlit app, leveraging a custom-trained YOLOv5 model to process videos effortlessly.
